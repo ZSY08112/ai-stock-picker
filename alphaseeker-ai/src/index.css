@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* 赛博朋克科技主题 */
+    --background: 240 20% 5%;       /* 深黑蓝 */
+    --foreground: 190 100% 95%;   /* 亮青色 */
+    --card: 240 25% 8%;           /* 科技黑 */
+    --card-foreground: 190 100% 95%;
+    --popover: 240 25% 8%;
+    --popover-foreground: 190 100% 95%;
+    --primary: 190 100% 60%;      /* 霓虹青 */
+    --primary-foreground: 240 20% 5%;
+    --secondary: 280 60% 25%;     /* 紫色调 */
+    --secondary-foreground: 190 100% 95%;
+    --muted: 240 20% 12%;
+    --muted-foreground: 190 100% 60%;
+    --accent: 320 100% 60%;       /* 霓虹粉 */
+    --accent-foreground: 240 20% 5%;
+    --destructive: 0 100% 60%;    /* 警示红 */
+    --destructive-foreground: 190 100% 95%;
+    --border: 240 30% 20%;       /* 科技边框 */
+    --input: 240 30% 15%;
+    --ring: 190 100% 60%;
+    /* 涨跌颜色 */
+    --bullish: 150 100% 45%;      /* 霓虹绿 */
+    --bearish: 0 100% 60%;        /* 霓虹红 */
+  }
+
+  .dark {
+    --background: 240 20% 5%;
+    --foreground: 190 100% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* 自定义滚动条 - 科技感 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.8) 0%, hsl(var(--accent) / 0.8) 100%);
+}
+
+/* 股票代码字体 */
+.stock-code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-weight: 600;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.3),
+                0 0 10px hsl(var(--primary) / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.5),
+                0 0 40px hsl(var(--primary) / 0.3);
+  }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes data-flow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* 霓虹发光效果 */
+.neon-glow {
+  text-shadow: 0 0 10px hsl(var(--primary) / 0.5),
+               0 0 20px hsl(var(--primary) / 0.3),
+               0 0 30px hsl(var(--primary) / 0.2);
+}
+
+.neon-border {
+  box-shadow: 0 0 5px hsl(var(--primary) / 0.3),
+              inset 0 0 5px hsl(var(--primary) / 0.1);
+}
+
+.neon-border-hover:hover {
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.5),
+              0 0 20px hsl(var(--primary) / 0.3),
+              inset 0 0 10px hsl(var(--primary) / 0.1);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 渐变背景 */
+.gradient-bg {
+  background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--card)) 50%, hsl(var(--secondary) / 0.2) 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 科技感边框 */
+.tech-border {
+  position: relative;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+.tech-border::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+/* 背景网格效果 */
+.grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* 扫描线效果 */
+.scanline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    hsl(var(--primary) / 0.1) 50%,
+    transparent 100%);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+}
+
+/* 科技感按钮 */
+.btn-cyber {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  @apply text-black font-semibold;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 100%);
+  transition: left 0.5s;
+}
+
+.btn-cyber:hover::before {
+  left: 100%;
+}
+
+/* 输入框科技感 */
+.input-cyber {
+  @apply bg-secondary border-border;
+  position: relative;
+}
+
+.input-cyber:focus {
+  @apply border-primary;
+  box-shadow: 0 0 10px hsl(var(--primary) / 0.2);
+}
+
+/* 数据流动画背景 */
+.data-flow-bg {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.05) 0%,
+    hsl(var(--accent) / 0.05) 25%,
+    hsl(var(--primary) / 0.05) 50%,
+    hsl(var(--accent) / 0.05) 75%,
+    hsl(var(--primary) / 0.05) 100%);
+  background-size: 400% 400%;
+  animation: data-flow 15s ease infinite;
+}
+
+/* 玻璃拟态效果 */
+.glass {
+  background: hsl(var(--card) / 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid hsl(var(--border) / 0.3);
+}
+
+/* 卡片悬停效果 */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply -translate-y-1;
+  box-shadow: 0 10px 40px -10px hsl(var(--primary) / 0.3),
+              0 0 20px hsl(var(--primary) / 0.1);
+}
+
+/* 评分条 */
+.score-bar {
+  @apply h-2 rounded-full bg-secondary overflow-hidden;
+}
+
+.score-bar-fill {
+  @apply h-full rounded-full transition-all duration-1000 ease-out;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+/* 浮动粒子效果背景 */
+.particles {
+  position: relative;
+  overflow: hidden;
+}
+
+.particles::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
